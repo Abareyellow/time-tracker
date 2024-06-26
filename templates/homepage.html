@@ -1,0 +1,203 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <title>Inmates Spreadsheet: Homepage</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <link href="/static/homepage.css" rel="stylesheet">
+{% endblock %}
+
+{% block section %}
+    <div class="layout">
+        <div class="button-nav">
+            <button class="all">All Inmates <span class="number">{{ lall }}</span></button>
+            <button class="vaca">Vacation Time Update <span class="number">{{ lupdate }}</span></button>
+            <button class="sick">Sick Leave Update <span class="number">{{ lsick }}</span></button>
+            <button class="reminder">Reminders <span class="number">{{ lremind }}</span></button>
+            <button class="urgent">Need Hours <span class="number">{{ lenTog }}</span></button>
+        </div>
+
+        <div id="gallery">
+            <div id="all">
+                <h3>All Inmates of {{plant}}</h3>
+                <table class="sheet">
+                    <thead>
+                        <tr>
+                            <th>OPUS Number</th>
+                            <th>Name</th>
+                            <th>Start Date</th>
+                            <th>Vacation Time</th>
+                            <th>Sick Leave</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in all %}
+                        <tr>
+                            <td>{{ i.OPUSNumber }}</td>
+                            <td>{{ i.FirstName }} {{i.LastName}}</td>
+                            <td>{{ i.StartDate }}</td>
+                            <td>{{ i.VacationHours }}</td>
+                            <td>{{ i.SickHours }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div id="vaca" class="hidden">
+                <h3>Vacation Hours Update</h3>
+                <table class="sheet">
+                    <thead>
+                        <tr>
+                            <th>OPUS Number</th>
+                            <th>Name</th>
+                            <th>Start Date</th>
+                            <th>Vacation Time</th>
+                            <th>Sick Leave</th>
+                            <th>Update</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in update %}
+                        <tr>
+                            <td>{{ i.OPUSNumber }}</td>
+                            <td>{{ i.FirstName }} {{i.LastName}}</td>
+                            <td>{{ i.StartDate }}</td>
+                            <td>{{ i.VacationHours }}</td>
+                            <td>{{ i.SickHours }}</td>
+                            <td>
+                                <form method="post" action="\homepage" name="vac">
+                                    <div class="hidden"><input type="radio" name="hours" value="vacation" checked="checked">  Vacation</div>
+                                    <input type="text" name="opus" value="{{ i.OPUSNumber }}" class="hidden" readonly>
+                                    <button type="submit">Update</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div id="sick" class="hidden">
+                <h3>Sick Leave Update</h3>
+                <table class="sheet">
+                    <thead>
+                        <tr>
+                            <th>OPUS Number</th>
+                            <th>Name</th>
+                            <th>Start Date</th>
+                            <th>Vacation Time</th>
+                            <th>Sick Leave</th>
+                            <th>Update</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in sick %}
+                        <tr>
+                            <td>{{ i.OPUSNumber }}</td>
+                            <td>{{ i.FirstName }} {{i.LastName}}</td>
+                            <td>{{ i.StartDate }}</td>
+                            <td>{{ i.VacationHours }}</td>
+                            <td>{{ i.SickHours }}</td>
+                            <td>
+                                <form method="post" action="\homepage" name="sl">
+                                    <div class="hidden"><input type="radio" name="hours" value="sick" checked="checked">  Sick</div>
+                                    <input type="text" name="opus" value="{{ i.OPUSNumber }}" class="hidden" readonly>
+                                    <button type="submit">Update</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div id="reminder" class="hidden">
+                <h3>Reminders</h3>
+                <table class="sheet">
+                    <thead>
+                        <tr>
+                            <th>OPUS Number</th>
+                            <th>Name</th>
+                            <th>Start Date</th>
+                            <th>Vacation Time</th>
+                            <th>Sick Leave</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in remind %}
+                        <tr>
+                            <td>{{ i.OPUSNumber }}</td>
+                            <td>{{ i.FirstName }} {{i.LastName}}</td>
+                            <td>{{ i.StartDate }}</td>
+                            <td>{{ i.VacationHours }}</td>
+                            <td>{{ i.SickHours }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div id="urgent" class="hidden">
+                <h3>Urgent Hours Update: Sick Leave</h3>
+                <table class="sheet">
+                    <thead>
+                        <tr>
+                            <th>OPUS Number</th>
+                            <th>Name</th>
+                            <th>Start Date</th>
+                            <th>Vacation Time</th>
+                            <th>Sick Leave</th>
+                            <th>Update</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in nsick %}
+                        <tr>
+                            <td>{{ i.OPUSNumber }}</td>
+                            <td>{{ i.FirstName }} {{i.LastName}}</td>
+                            <td>{{ i.StartDate }}</td>
+                            <td>{{ i.VacationHours }}</td>
+                            <td>{{ i.SickHours }}</td>
+                            <td>
+                                <form method="post" action="\homepage" name="urgentS">
+                                    <div class="hidden"><input type="radio" name="hours" value="hsick" checked="checked"></div>
+                                    <input type="text" name="opus" value="{{ i.OPUSNumber }}" class="hidden" readonly>
+                                    <button type="submit">Update</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <h3>Urgent Hours Update: Vacation</h3>
+                <table class="sheet">
+                    <thead>
+                        <tr>
+                            <th>OPUS Number</th>
+                            <th>Name</th>
+                            <th>Start Date</th>
+                            <th>Vacation Time</th>
+                            <th>Sick Leave</th>
+                            <th>Update</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in nvaca %}
+                        <tr>
+                            <td>{{ i.OPUSNumber }}</td>
+                            <td>{{ i.FirstName }} {{i.LastName}}</td>
+                            <td>{{ i.StartDate }}</td>
+                            <td>{{ i.VacationHours }}</td>
+                            <td>{{ i.SickHours }}</td>
+                            <td>
+                                <form method="post" action="\homepage" name="urgentV">
+                                    <div class="hidden"><input type="radio" name="hours" value="hvaca" checked="checked">  Vacation</div>
+                                    <input type="text" name="opus" value="{{ i.OPUSNumber }}" class="hidden" readonly>
+                                    <button type="submit">Update</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="static/script.js"></script>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <title>Inmates Spreadsheet: Add New Inmates</title>
+    <link href="/static/index.css" rel="stylesheet">
+{% endblock %}
+
+{% block section %}
+    <h2>Delete Inmate</h2>
+    <form method="post" action="\delete">
+
+        <label for="opus">OPUS Number:
+            <select name="opus" id="opus" required>
+                {% if session["user_id"] != 1 and session["user_id"] %}
+                  {% for i in inmates %}
+                   <option value="{{i.OPUSNumber}}">{{i.OPUSNumber}} - {{i.FirstName}} {{i.LastName}}</option>
+                  {% endfor %}
+                {% endif %}
+                {% if session["user_id"] == 1 %}
+                  {% for i in every %}
+                    <option value="{{i.OPUSNumber}}">{{i.OPUSNumber}} - {{i.FirstName}} {{i.LastName}}</option>
+                  {% endfor %}
+                {% endif %}
+            </select>
+        </label>
+
+        <button type="submit">Remove Inmate</button>
+
+    </form>
+{% endblock %}

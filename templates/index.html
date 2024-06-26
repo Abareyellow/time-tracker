@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <title>Inmates Spreadsheet: Login</title>
+    <link href="/static/index.css" rel="stylesheet">
+{% endblock %}
+
+{% block section %}
+    <h2>Login</h2>
+
+    {% if error %}
+        <p><strong>{{error}}</strong></p>
+    {% endif %}
+
+    <form action="/" method="post">
+        <label for="username">Username:
+            <input name="username" type="text" id="username" required autocomplete="off">
+        </label>
+
+        <label for="password">Password:
+            <input name="password" type="password" id="password" required autocomplete="off">
+        </label>
+
+        <button type="submit">Login</button>
+    </form>
+{% endblock %}

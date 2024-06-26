@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block head %}
+  <title>Inmates Spreadsheet: Status for #{{num}}</title>
+  <link href="/static/status.css" rel="stylesheet">
+{% endblock %}
+
+{% block section %}
+  <h2>Status of #{{num}}</h2>
+
+  <p><strong>Plant:</strong> {{plant}}</p>
+
+  <p><strong>Need:</strong> {{need}}</p>
+
+  <p><strong>Note:</strong> {{note}}</p>
+
+  <div class="flex">
+    <button><a href="\request">Back to Request</a></button>
+    <form method="post" action="\closed">
+      <input type="number" name="num" value="{{num}}" class="hidden">
+      <button type="submit">Close Request</button>
+    </form>
+  </div>
+{% endblock %}

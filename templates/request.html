@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <title>Inmates Spreadsheet: Request</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <link href="/static/homepage.css" rel="stylesheet">
+    <link href="/static/update.css" rel="stylesheet">
+    <link href="/static/index.css" rel="stylesheet">
+{% endblock %}
+
+{% block section %}
+    {% if session["user_id"] != 1 and session["user_id"] %}
+        <h2>Send a Request</h2>
+        <form method="post" action="\request">
+            <label for="plant">
+                Plant: <input type="text" name="plant" id="plant" value="{{plant}}" readonly>
+            </label>
+            <label for="need">What needs to be done?<br>
+                <input type="radio" name="need" value="Add" id="time"> Add An User<br>
+                <input type="radio" name="need" value="Update" id="up"> Update Info<br>
+                <input type="radio" name="need" value="Other"> Other<br>
+            </label>
+            <div id="addition"></div>
+            <button type="submit">Request</button>
+        </form>
+    {% endif %}
+    {% if session["user_id"] == 1 %}
+        <h2>All Request</h2>
+
+        <table class="sheet">
+            <thead>
+                <tr>
+                    <th>Num</th>
+                    <th>Plant</th>
+                    <th>Need</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in request %}
+                  <tr>
+                    <td>{{ r.num }}</td>
+                    <td>{{ r.plant }}</td>
+                    <td>{{ r.need }}</td>
+                    <td>
+                        <form method="post" action="\status">
+                            <input type="text" name="num" value="{{r.num}}" class="hidden">
+                            <button type="submit">Update Status</button>
+                        </form>
+                    </td>
+                  </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    <script src="static/request.js"></script>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block head %}
+  <title>Inmates Spreadsheet: Add a Plant</title>
+  <link href="/static/index.css" rel="stylesheet">
+{% endblock %}
+
+{% block section %}
+   <h2>Add a Plant</h2>
+   <form method="post" action="\add_plant">
+     <label for="name">Name:
+        <input type="text" name="name" id="name" required autocomplete="off">
+     </label>
+
+     <button type="submit">Add Plant</button>
+   </form>
+{% endblock %}

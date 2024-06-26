@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <title>Inmates Spreadsheet: Add New Inmates</title>
+    <link href="/static/index.css" rel="stylesheet">
+{% endblock %}
+
+{% block section %}
+    <h2>Add New Inmate</h2>
+    <form method="post" action="\add">
+        <label for="first">First Name:
+            <input type="text" name="first" id="first" required autocomplete="off">
+        </label>
+
+        <label for="last">Last Name:
+            <input type="text" name="last" id="last" required autocomplete="off">
+        </label>
+
+        <label for="opus">OPUS Number:
+            <input type="number" name="opus" id="opus" required autocomplete="off">
+        </label>
+
+        <label for="start">Start Date:
+            <input type="date" name="start" id="start" required autocomplete="off">
+        </label>
+
+        {% if session["user_id"] != 1 and session["user_id"] %}
+          <label for="plant">Plant:
+             <input type="number" name="plant" id="plant" value="{{plant}}" readonly>
+          </label>
+        {% endif %}
+        {% if session["user_id"] == 1 %}
+          <label for="plant">Plant: 
+            <select name="plant" id="plant" required>
+                {% for i in all %}
+                  <option value="{{i.id}}">{{ i.Name }}</option>
+                {% endfor %}
+            </select>
+          </label>
+        {% endif %}
+
+        <button type="submit">Add</button>
+
+    </form>
+{% endblock %}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <link href="/static/global.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&display=swap" rel="stylesheet">
+        {% block head %} {% endblock %}
+    </head>
+
+    <body>
+        <nav>
+            <a href="/homepage" id="homepage">Inmates Spreadsheet</a>
+            <div class="right">
+            {% if session["user_id"] == 1 %}
+                <div class="dropdown">
+                    <button class="dropbtn">Add <i class="fa fa-caret-down"></i></button>
+                    <div class="dropdown-content">
+                        <a href="/add">Add New Inmate</a>
+                        <a href="/add_plant">Add New Plant</a>
+                        <a href="/add_user">Add New User</a>
+                    </div>
+                </div>
+                <a href="/update">Update Inmates Hours</a>
+                <a href="/delete">Delete Inmate</a>
+                <a href="/request">Requests</a>
+            {% endif %}
+            {% if session["user_id"] != 1 and session["user_id"] %}
+                <a href="/add">Add New Inmate</a>
+                <a href="/update">Update Inmate Hours</a>
+                <a href="/delete">Delete Inmate</a>
+                <a href="/request">Request Form</a>
+            {% endif %}
+            </div>
+        </nav>
+        <div class="container">
+            <section>
+                {% block section %} {% endblock %}
+            </section>
+        </div>
+    </body>
+
+</html>

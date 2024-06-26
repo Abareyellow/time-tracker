@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <title>Inmates Spreadsheet: Update Inmate's Hours</title>
+    <link href="/static/update.css" rel="stylesheet">
+    <link href="/static/index.css" rel="stylesheet">
+{% endblock %}
+
+{% block section %}
+    <h2>Update Hours</h2>
+    <form method="post" action="\update">
+        <label for="opus">OPUS Number:
+            <select name="opus" id="opus" required>
+                {% if session["user_id"] != 1 and session["user_id"] %}
+                  {% for i in inmates %}
+                   <option value="{{i.OPUSNumber}}">{{i.OPUSNumber}} - {{i.FirstName}} {{i.LastName}}</option>
+                  {% endfor %}
+                {% endif %}
+                {% if session["user_id"] == 1 %}
+                  {% for i in every %}
+                    <option value="{{i.OPUSNumber}}">{{i.OPUSNumber}} - {{i.FirstName}} {{i.LastName}}</option>
+                  {% endfor %}
+                {% endif %}
+            </select>
+        </label>
+
+        <label for="time">What Time do You Want to Subtract From? <br>
+            <input type="radio" name="time" value="vacation" id="time" checked="checked">  Vacation Time<br>
+            <input type="radio" name="time" value="sick">  Sick Leave
+        </label>
+
+        <label for="hours">Number of Hours:
+            <input type="number" name="hours" id="hours" required autocomplete="off">
+        </label>
+        <button type="submit">Update</button>
+    </form>
+{% endblock %}

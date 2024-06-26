@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block head %}
+  <title>Inmates Spreadsheet: Add an User</title>
+  <link href="/static/index.css" rel="stylesheet">
+{% endblock %}
+
+{% block section %}
+  <h2>Add An User</h2>
+  <form method="post" action="/add_user">
+    <label for="name">Name (First and Last):
+        <input type="text" name="name" id="name" required autocomplete="off">
+     </label>
+
+     <label for="plant">Plant:
+        <select name="plant" id="plant" required>
+            {% for i in all %}
+              <option value="{{i.id}}">{{ i.Name }}</option>
+            {% endfor %}
+        </select>
+      </label>
+
+      <button type="submit">Add User</button>
+  </form>
+{% endblock %}

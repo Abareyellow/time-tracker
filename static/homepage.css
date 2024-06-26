@@ -1,0 +1,44 @@
+table {
+    background-color: lightgrey;
+    border: 1px solid black;
+    margin-bottom: 20px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+th {
+    background-color: #3C4142;
+    font-weight: bold;
+    color: white;
+    padding: 2px;
+    width: 150px;
+}
+
+span {
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+    padding: 3px;
+}
+
+h3 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 28px;
+    font-family: "Ubuntu", sans-serif;
+}
+
+#gallery {
+    border-radius: 4px;
+    background-color: #ffead5;
+    padding: 10px;
+}
+
+.button-nav {
+    margin-bottom: -20px;
+}
+
+.button-nav button {
+    border:none;
+    padding: 7px;
+}
