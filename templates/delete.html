@@ -12,7 +12,7 @@
         <label for="opus">OPUS Number:
             <select name="opus" id="opus" required>
                 {% if session["user_id"] != 1 and session["user_id"] %}
-                  {% for i in inmates %}
+                  {% for i in plant %}
                    <option value="{{i.OPUSNumber}}">{{i.OPUSNumber}} - {{i.FirstName}} {{i.LastName}}</option>
                   {% endfor %}
                 {% endif %}

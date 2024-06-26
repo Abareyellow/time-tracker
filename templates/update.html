@@ -16,6 +16,7 @@
                    <option value="{{i.OPUSNumber}}">{{i.OPUSNumber}} - {{i.FirstName}} {{i.LastName}}</option>
                   {% endfor %}
                 {% endif %}
+                
                 {% if session["user_id"] == 1 %}
                   {% for i in every %}
                     <option value="{{i.OPUSNumber}}">{{i.OPUSNumber}} - {{i.FirstName}} {{i.LastName}}</option>
