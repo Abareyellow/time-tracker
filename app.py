@@ -295,3 +295,6 @@ def get_vacation_hours(data):
         day = add_a_month(i['NextVacationDate'])
         db.execute("UPDATE Inmates SET VacationHours = ?, NextVacationDate = ? WHERE OPUSNumber = ?", hours, day, id)
         print(f"Got It! {i['FirstName']} {i['LastName']} has Updated")
+
+if __name__ == '__main__':
+    app.run(host="0.0.0.0", port=5000)
